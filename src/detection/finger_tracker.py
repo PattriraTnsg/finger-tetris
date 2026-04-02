@@ -1,0 +1,29 @@
+from collections import deque
+
+class FingerTracker:
+    """
+    รับ x position ของมือ → smooth + เช็ค Zone
+    - ซ้าย 30% (x < 0.3) = MOVE_LEFT
+    - ขวา 30% (x > 0.7) = MOVE_RIGHT
+    - ตรงกลาง 40% = NONE
+    """
+
+    def __init__(self, smoothing=5):
+        self._history = deque(maxlen=smoothing)
+
+    def update(self, x_normalized: float) -> str:
+        self._history.append(x_normalized)
+        smooth_x = sum(self._history) / len(self._history)
+
+        if smooth_x < 0.30:
+            return "MOVE_RIGHT"
+        elif smooth_x > 0.70:
+            return "MOVE_LEFT"
+        
+        return "NONE"
+
+    @property
+    def smooth_x(self) -> float:
+        if not self._history:
+            return 0.5
+        return sum(self._history) / len(self._history)
