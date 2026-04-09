@@ -64,6 +64,8 @@ class GestureClassifier:
             self.prev_pose = "OTHER"
 
         # ── 3. เช็ค Pause (Peace Sign ✌️ ค้าง 1 วินาที) ──────────────
+        # หมายเหตุ: ระหว่างทำ peace sign ระบบจะ return IDLE (ไม่ขยับ)
+        # เพื่อป้องกัน accidental move ขณะกำลังพยายาม pause
         if index and middle and not ring and not pinky:
             if self.peace_start_time == 0:
                 self.peace_start_time = time.time()

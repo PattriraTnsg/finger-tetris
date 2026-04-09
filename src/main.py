@@ -96,7 +96,7 @@ def main() -> None:
     cam_overlay = CameraOverlay(flip_horizontal=True)
     hud         = HUD(hud_surface, HUD_WIDTH, WIN_H)
 
-    # ── webcam ───────────────────────────────────────────────────────────────python main.py
+    # ── webcam ───────────────────────────────────────────────────────────────
     cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print("[WARNING] No webcam found – running without gesture control.")
